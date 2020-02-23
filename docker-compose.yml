@@ -4,7 +4,7 @@ services:
   phpwebserver:
     build: 
       context: ./dockerized-dev-env/bin/phpwebserver
-    container_name: 'phpwebserver'
+    container_name: 'lamp-boilerplate-phpwebserver'
     restart: 'always'
     ports:
       - 80:80
@@ -20,7 +20,7 @@ services:
       - ./.env:/etc/environment # Remove this line if you don't care about using your .env file in PHP-land like so: parse_ini_file("/etc/enviornment", true, INI_SCANNER_RAW);
   mysql:
     build: ./dockerized-dev-env/bin/mysql
-    container_name: 'mysql'
+    container_name: ${DB_CONNECTION}
     restart: 'always'
     ports:
       - 3306:${DB_PORT}
@@ -34,7 +34,7 @@ services:
       MYSQL_PASSWORD: ${DB_PASSWORD}
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
-    container_name: 'phpmyadmin'
+    container_name: 'lamp-boilerplate-phpmyadmin'
     links:
       - mysql
     environment:
@@ -45,7 +45,7 @@ services:
     volumes:
       - /sessions
   redis:
-    container_name: 'redis'
+    container_name: 'lamp-boilerplate-redis'
     image: redis:latest
     ports:
       - 6379:${REDIS_PORT}

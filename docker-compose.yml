@@ -1,0 +1,51 @@
+version: "3"
+
+services:
+  phpwebserver:
+    build: 
+      context: ./dockerized-dev-env/bin/phpwebserver
+    container_name: 'phpwebserver'
+    restart: 'always'
+    ports:
+      - 80:80
+      - 443:443
+    links: 
+      - mysql
+    volumes: 
+      - ${DOCUMENT_ROOT-./www}:/var/www/html
+      - ${PHP_INI-./dockerized-dev-env/config/php/php.ini}:/usr/local/etc/php/php.ini
+      - ${VHOSTS_DIR-./dockerized-dev-env/config/vhosts}:/etc/apache2/sites-enabled
+      - ${LOG_DIR-./dockerized-dev-env/logs/apache2}:/var/log/apache2
+      - ${SSL_CERTS_DIR-./dockerized-dev-env/certs}:/etc/apache2/ssl
+      - ./.env:/etc/environment # Remove this line if you don't care about using your .env file in PHP-land like so: parse_ini_file("/etc/enviornment", true, INI_SCANNER_RAW);
+  mysql:
+    build: ./dockerized-dev-env/bin/mysql
+    container_name: 'mysql'
+    restart: 'always'
+    ports:
+      - 3306:${DB_PORT}
+    volumes: 
+      - ${MYSQL_DATA_DIR-./dockerized-dev-env/data/mysql}:/var/lib/mysql
+      - ${MYSQL_LOG_DIR-./dockerized-dev-env/logs/mysql}:/var/log/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: 'phpmyadmin'
+    links:
+      - mysql
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+    ports:
+      - 8080:80
+    volumes:
+      - /sessions
+  redis:
+    container_name: 'redis'
+    image: redis:latest
+    ports:
+      - 6379:${REDIS_PORT}

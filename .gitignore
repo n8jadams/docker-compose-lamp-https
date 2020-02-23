@@ -1,0 +1,8 @@
+/.env
+/.vscode
+/dockerized-dev-env/config/php/*
+/dockerized-dev-env/config/vhosts/*
+/dockerized-dev-env/data/*
+/dockerized-dev-env/logs/apache2/*
+/dockerized-dev-env/logs/mysql/*
+.DS_Store

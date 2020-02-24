@@ -47,9 +47,9 @@ cp "$KEY_FILE" "${DIR}dockerized-dev-env/certs/$KEY_FILE"
 # Update the apache config
 cat > "${DIR}/dockerized-dev-env/config/vhosts/${SITE_URL}-ssl.conf" <<EOF
 <VirtualHost *:80>
-	ServerAdmin webmaster@localhost
+	ServerAdmin webmaster@${SITE_URL}
 	DocumentRoot "/var/www/html"
-	ServerName localhost
+	ServerName ${SITE_URL}
 
 	<Directory "/var/www/html/">
 		AllowOverride all
@@ -61,9 +61,9 @@ cat > "${DIR}/dockerized-dev-env/config/vhosts/${SITE_URL}-ssl.conf" <<EOF
 </VirtualHost>
 
 <VirtualHost *:443>
-	ServerAdmin webmaster@localhost
+	ServerAdmin webmaster@${SITE_URL}
 	DocumentRoot "/var/www/html"
-	ServerName localhost
+	ServerName ${SITE_URL}
 
 	<Directory "/var/www/html/">
 		AllowOverride all

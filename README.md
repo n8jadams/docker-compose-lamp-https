@@ -5,8 +5,9 @@
 2. `$ cp example.env .env`
 3. Change the `SITE_URL` field in `.env` to the domain you want (by default it's `mycustomdomain.test`)
 4. `$ brew install mkcert nss`
-5. `$ ./generate-certs-mac.sh` (You can see in the git diff what changes this script made)
-6. `$ docker-compose up`
+5. `$ ./generate-certs-mac.sh`
+6. Add an entry to your `/etc/hosts` file. `127.0.0.1	mycustomdomain.test`
+7. `$ docker-compose up`
 
 Then open up `https://mycustomdomain.test`. Put your PHP app in the `/www` folder.
 

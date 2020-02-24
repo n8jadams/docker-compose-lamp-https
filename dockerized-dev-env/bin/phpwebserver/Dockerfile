@@ -45,8 +45,11 @@ RUN docker-php-ext-install -j$(nproc) gd
 # Enable ssl/https
 RUN ln -s /etc/apache2/mods-available/ssl.load  /etc/apache2/mods-enabled/ssl.load
 
-# Set ther servername globally
+# Set the servername globally
 RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf
+
+# Debug everything... I find this useful personally.
+RUN sed -i -e 's/LogLevel warn/LogLevel debug/g' /etc/apache2/apache2.conf
 
 # Enable apache modules
 RUN a2enmod ssl

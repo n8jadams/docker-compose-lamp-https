@@ -18,6 +18,6 @@ Then open up `https://mycustomdomain.test`. Put your PHP app in the `/www` folde
 $env = parse_ini_file("/etc/enviornment", true, INI_SCANNER_RAW);
 ```
 
-## Gotcha
+## Gotchas
 * PHP MyAdmin only works over http... I'm open to a PR that fixes this.
-* If you want to use this with multiple projects, make sure to change the `container_name`s in `docker-compose.yml`. (Make sure that the )
+* If you want to use this with multiple projects, make sure to change the `container_name`s in `docker-compose.yml`.

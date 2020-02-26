@@ -17,6 +17,7 @@ Then open up `https://mycustomdomain.test`. Put your PHP app in the `/www` folde
 ```
 $env = parse_ini_file("/etc/enviornment", true, INI_SCANNER_RAW);
 ```
+* If you want to ssh into the container, run the following: `$ docker exec -it lamp-boilerplate-phpwebserver /bin/bash`. (Replace "lamp-boilerplate-phpwebserver" with whatever you name the container in `docker-compose.yml`.)
 
 ## Gotchas
 * PHP MyAdmin only works over http... I'm open to a PR that fixes this.

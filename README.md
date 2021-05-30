@@ -1,4 +1,5 @@
 # LAMP Dev Env with HTTPS
+For different versions of PHP than the newest, check [the releases section](https://github.com/n8jadams/docker-compose-lamp-https/releases).
 
 ## Mac Instructions
 1. Clone This Repo
